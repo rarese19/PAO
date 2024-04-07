@@ -7,26 +7,34 @@ public class Magazin {
     private int statiune_id;
     private Statiune statiune;
     private String numar_contact;
-    private String adresa_mai;
+    private String adresa_mail;
     private ArrayList<Angajat> angajati;
 
     public Magazin() { }
 
-    public Magazin(int magazin_id, int statiune_id, Statiune statiune, String numar_contact, String adresa_mai, ArrayList<Angajat> angajati) {
+    public Magazin(int magazin_id, int statiune_id, Statiune statiune, String numar_contact, String adresa_mail,
+                   ArrayList<Angajat> angajati) {
         this.magazin_id = magazin_id;
         this.statiune_id = statiune_id;
         this.statiune = statiune;
         this.numar_contact = numar_contact;
-        this.adresa_mai = adresa_mai;
+        this.adresa_mail = adresa_mail;
         this.angajati = angajati;
     }
 
-    public Magazin(int magazin_id, int statiune_id, Statiune statiune, String numar_contact, String adresa_mai) {
+    public Magazin(int magazin_id, int statiune_id, Statiune statiune, String numar_contact, String adresa_mail) {
         this.magazin_id = magazin_id;
         this.statiune_id = statiune_id;
         this.statiune = statiune;
         this.numar_contact = numar_contact;
-        this.adresa_mai = adresa_mai;
+        this.adresa_mail = adresa_mail;
+    }
+
+    public Magazin(int magazin_id, int statiune_id, String numar_contact, String adresa_mail) {
+        this.magazin_id = magazin_id;
+        this.statiune_id = statiune_id;
+        this.numar_contact = numar_contact;
+        this.adresa_mail = adresa_mail;
     }
 
     public int getMagazin_id() {
@@ -61,12 +69,12 @@ public class Magazin {
         this.numar_contact = numar_contact;
     }
 
-    public String getAdresa_mai() {
-        return adresa_mai;
+    public String getAdresa_mail() {
+        return adresa_mail;
     }
 
-    public void setAdresa_mai(String adresa_mai) {
-        this.adresa_mai = adresa_mai;
+    public void setAdresa_mail(String adresa_mail) {
+        this.adresa_mail = adresa_mail;
     }
 
     public ArrayList<Angajat> getAngajati() {
@@ -93,7 +101,7 @@ public class Magazin {
                 ", statiune_id=" + statiune_id +
                 ", statiune=" + statiuneString +
                 ", numar_contact='" + numar_contact + '\'' +
-                ", adresa_mai='" + adresa_mai + '\'' +
+                ", adresa_mai='" + adresa_mail + '\'' +
                 ", angajati=" + angajatiList +
                 '}';
     }

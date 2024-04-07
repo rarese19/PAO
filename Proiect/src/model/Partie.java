@@ -22,6 +22,16 @@ public class Partie {
         this.grad_dificultate = grad_dificultate;
     }
 
+    public Partie(int partie_id, int statiune_id, String nume, int inaltime, int lungime,
+                  String grad_dificultate) {
+        this.partie_id = partie_id;
+        this.statiune_id = statiune_id;
+        this.nume = nume;
+        this.inaltime = inaltime;
+        this.lungime = lungime;
+        this.grad_dificultate = grad_dificultate;
+    }
+
     public int getPartie_id() {
         return partie_id;
     }

@@ -30,6 +30,54 @@ public class Statiune {
         this.nume = nume;
     }
 
+    public int getStatiune_id() {
+        return statiune_id;
+    }
+
+    public void setStatiune_id(int statiune_id) {
+        this.statiune_id = statiune_id;
+    }
+
+    public String getRegiune() {
+        return regiune;
+    }
+
+    public void setRegiune(String regiune) {
+        this.regiune = regiune;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public ArrayList<Partie> getPartii() {
+        return partii;
+    }
+
+    public void setPartii(ArrayList<Partie> partii) {
+        this.partii = partii;
+    }
+
+    public ArrayList<Magazin> getMagazine() {
+        return magazine;
+    }
+
+    public void setMagazine(ArrayList<Magazin> magazine) {
+        this.magazine = magazine;
+    }
+
     @Override
     public String toString() {
         String partiiList = " { }";

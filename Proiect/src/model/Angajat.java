@@ -24,6 +24,17 @@ public class Angajat {
         this.numar_telefon = numar_telefon;
     }
 
+    public Angajat(int angajat_id, int magazin_id, String nume, String prenume, long cnp,
+                   long salariu, String numar_telefon) {
+        this.angajat_id = angajat_id;
+        this.magazin_id = magazin_id;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.cnp = cnp;
+        this.salariu = salariu;
+        this.numar_telefon = numar_telefon;
+    }
+
     public int getAngajat_id() {
         return angajat_id;
     }
