@@ -41,7 +41,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setString(6, entity.getGrad_dificultate());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -63,13 +63,13 @@ public class PartieRepository implements GenericRepository<Partie>{
                 Partie partie = new Partie(
                         res.getInt(1),
                         res.getInt(2),
-                        statiuneRepository.get(res.getInt(2)),
+                        statiuneRepository.statiuneForMagazin(res.getInt(2)),
                         res.getString(3),
                         res.getInt(4),
                         res.getInt(5),
                         res.getString(6)
                 );
-                audit.write(sql, "Done successfully!");
+                audit.write(sql, partie, "Done successfully!");
                 return partie;
             }
             return null;
@@ -91,7 +91,7 @@ public class PartieRepository implements GenericRepository<Partie>{
                 Partie partie = new Partie(
                         res.getInt(1),
                         res.getInt(2),
-                        statiuneRepository.get(res.getInt(2)),
+                        statiuneRepository.statiuneForMagazin(res.getInt(2)),
                         res.getString(3),
                         res.getInt(4),
                         res.getInt(5),
@@ -99,7 +99,7 @@ public class PartieRepository implements GenericRepository<Partie>{
                 );
                 partii.add(partie);
             }
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, null, "Done successfully!");
             return partii;
         }
         catch (SQLException e) {
@@ -130,7 +130,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setInt(6, entity.getPartie_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -149,7 +149,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setInt(1, entity.getPartie_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -178,7 +178,7 @@ public class PartieRepository implements GenericRepository<Partie>{
                 );
                 partii.add(partie);
             }
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, statiune, "Done successfully!");
             return partii;
         }
         catch (Exception e) {

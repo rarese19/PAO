@@ -1,0 +1,5 @@
+Statement 0
+SELECT * FROM importator
+[Importator{importator_id=100, nume='Global Solutions', adresa_mail='gs.client@gmail.com', numar_contact='+40739576438', metoda_transport='rutier'}, Importator{importator_id=101, nume='Horizon Imports', adresa_mail='horizon.client@gmail.com', numar_contact='+40775834556', metoda_transport='feroviar'}, Importator{importator_id=102, nume='Nova International', adresa_mail='novat.client@gmail.com', numar_contact='+33221465400', metoda_transport='aerian'}, Importator{importator_id=103, nume='Vertex Imports', adresa_mail='vertex.client@gmail.com', numar_contact='+40758908582', metoda_transport='rutier'}, Importator{importator_id=104, nume='Prime Importers', adresa_mail='pit.client@gmail.com', numar_contact='+43665018669', metoda_transport='naval'}]
+Done succesfully!
+

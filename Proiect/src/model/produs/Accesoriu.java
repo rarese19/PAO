@@ -1,20 +1,22 @@
 package model.produs;
 
 public class Accesoriu extends Produs{
-    private char marime;
+    private String marime;
     private String color;
 
-    public Accesoriu(int produs_id, String nume, int pret, int disponibilitate, String brand, char marime, String color) {
+    public Accesoriu(int produs_id, String nume, int pret, int disponibilitate, String brand, String marime, String color) {
         super(produs_id, nume, pret, disponibilitate, brand);
         this.marime = marime;
         this.color = color;
     }
 
-    public char getMarime() {
+    public Accesoriu() { }
+
+    public String getMarime() {
         return marime;
     }
 
-    public void setMarime(char marime) {
+    public void setMarime(String marime) {
         this.marime = marime;
     }
 

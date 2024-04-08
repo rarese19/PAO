@@ -23,10 +23,10 @@ public class Audit {
         return instance;
     }
 
-    public void write(String sqlStatement, String result) {
+    public <T> void write(String sqlStatement, T entity, String result) {
         try {
             writer.write("Statement " + count++ + "\n");
-            writer.write(sqlStatement + "\n" + result + "\n");
+            writer.write(sqlStatement + "\n" + entity + '\n' + result + "\n\n");
             writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);

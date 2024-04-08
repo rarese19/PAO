@@ -2,6 +2,7 @@ package persistence;
 
 import model.*;
 import oracle.jdbc.OraclePreparedStatement;
+import service.DBConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
 
         try {
             OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
-                    dbConnection.getConn().prepareStatement(sql);
+                    DBConnection.getInstance().getConn().prepareStatement(sql);
 
             prepedStatement.setInt(1, entity.getMagazin_id());
             prepedStatement.setInt(2, entity.getStatiune_id());
@@ -42,7 +43,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
             prepedStatement.setString(4, entity.getAdresa_mail());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,19 +65,11 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                 Magazin magazin = new Magazin(
                         res.getInt(1),
                         res.getInt(2),
-                        statiuneRepository.get(res.getInt(2)),
+                        statiuneRepository.statiuneForMagazin(res.getInt(2)),
                         res.getString(3),
                         res.getString(4)
                 );
-
-                Magazin toReturn = new Magazin(
-                        res.getInt(1),
-                        res.getInt(2),
-                        statiuneRepository.get(res.getInt(2)),
-                        res.getString(3),
-                        res.getString(4),
-                        angajatRepository.getByMagazin(magazin));
-                audit.write(sql, "Done successfully!");
+                audit.write(sql, magazin, "Done successfully!");
                 return magazin;
             }
         } catch (SQLException e) {
@@ -141,7 +134,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                         angajatRepository.getByMagazin(magazin));
                 magazine.add(toAdd);
             }
-            audit.write(sql, "Done succesfully!");
+            audit.write(sql, null, "Done succesfully!");
             return magazine;
 
         }
@@ -162,11 +155,12 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                     dbConnection.getConn().prepareStatement(sql);
 
             prepedStatement.setInt(1, entity.getStatiune_id());
-            prepedStatement.setString(2, entity.getAdresa_mail());
-            prepedStatement.setInt(3, entity.getMagazin_id());
+            prepedStatement.setString(2, entity.getNumar_contact());
+            prepedStatement.setString(3, entity.getAdresa_mail());
+            prepedStatement.setInt(4, entity.getMagazin_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -185,7 +179,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
             prepedStatement.setInt(1, entity.getMagazin_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -213,7 +207,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                 );
                 magazine.add(magazin);
             }
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, statiune, "Done successfully!");
             return magazine;
         } catch (SQLException e) {
             throw new RuntimeException(e);

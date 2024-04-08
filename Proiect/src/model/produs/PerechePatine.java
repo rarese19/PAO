@@ -5,12 +5,15 @@ public class PerechePatine extends Produs{
     private String material;
     private String tip;
 
-    public PerechePatine(int produs_id, String nume, int pret, int disponibilitate, String brand, float marime, String material, String tip) {
+    public PerechePatine(int produs_id, String nume, int pret, int disponibilitate, String brand, float marime,
+                         String material, String tip) {
         super(produs_id, nume, pret, disponibilitate, brand);
         this.marime = marime;
         this.material = material;
         this.tip = tip;
     }
+
+    public PerechePatine() { }
 
     public float getMarime() {
         return marime;

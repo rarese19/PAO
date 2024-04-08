@@ -3,6 +3,7 @@ package persistence;
 import jdk.jfr.Percentage;
 import model.*;
 import oracle.jdbc.OraclePreparedStatement;
+import service.DBConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,31 +32,20 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
     @Override
     public void add(Statiune entity) {
         String sql = """
-                    INSERT INTO statiune (statiune_id, regiune, stat, nume) VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO statiune (statiune_id, regiune, stat, nume) VALUES (?, ?, ?, ?)
                     """;
         try {
             OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
-                    dbConnection.getConn().prepareStatement(sql);
+                    DBConnection.getInstance().getConn().prepareStatement(sql);
 
-            if (entity.getStatiune_id() == 0){
-                Statement stmt = dbConnection.getConn().createStatement();
-                ResultSet res = stmt.executeQuery("SELECT NR_STATIUNI.nextval FROM dual");
-                int value = 0;
-                if (res.next()) {
-                    value = res.getInt(1);
-                }
-
-                prepedStatement.setInt(1, value);
-            }
-            else {
-                prepedStatement.setInt(1, entity.getStatiune_id());
-            }
-
+            prepedStatement.setInt(1, entity.getStatiune_id());
             prepedStatement.setString(2, entity.getRegiune());
             prepedStatement.setString(3, entity.getStat());
             prepedStatement.setString(4, entity.getNume());
 
-            audit.write(sql, "Done successfully!");
+            prepedStatement.execute();
+
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -89,15 +79,45 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                         partieRepository.getPartiiByStatiune(statiune),
                         magazinRepository.getMagazineByStatiune(statiune)
                 );
-                audit.write(sql, "Done successfully!" + statiune.toString());
+                audit.write(sql, toReturn, "Done successfully!");
                 return toReturn;
             }
             else {
-                audit.write(sql, "No result found!");
+                audit.write(sql, null, "No result found!");
                 return null;
             }
         }
         catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Statiune statiuneForMagazin(int id) {
+        String sql = """
+                SELECT * FROM statiune where statiune_id =?
+                """;
+
+        try {
+            OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
+                    dbConnection.getConn().prepareStatement(sql);
+            prepedStatement.setInt(1, id);
+
+            ResultSet res = prepedStatement.executeQuery();
+            if (res.next()) {
+                Statiune statiune = new Statiune(
+                        res.getInt(1),
+                        res.getString(2),
+                        res.getString(3),
+                        res.getString(4)
+                );
+                audit.write(sql, statiune, "Done successfully!");
+                return statiune;
+            }
+            else {
+                audit.write(sql, null, "No result found!");
+                return null;
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -120,11 +140,11 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                         res.getString(3),
                         res.getString(4)
                 );
-                audit.write(sql, "Done successfully!");
+                audit.write(sql, statiune, "Done successfully!");
                 return statiune;
             }
             else {
-                audit.write(sql, "No result found!");
+                audit.write(sql, null, "No result found!");
                 return null;
             }
         }
@@ -161,7 +181,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                 );
                 statiuni.add(toAdd);
             }
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, null, "Done successfully!");
             return statiuni;
         }
         catch (SQLException e) {
@@ -184,7 +204,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
             prepedStatement.setInt(4, entity.getStatiune_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -203,7 +223,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
             prepedStatement.setInt(1, entity.getStatiune_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);

@@ -13,6 +13,8 @@ public class Tranzactie {
     private Date data;
     private Date data_returnare;
 
+    public Tranzactie() { }
+
     public Tranzactie(int tranzactie_id, int client_id, Client client, int magazin_id, Magazin magazin,
                       String metoda_plata, String status, Date data, Date data_returnare) {
         this.tranzactie_id = tranzactie_id;
@@ -20,6 +22,17 @@ public class Tranzactie {
         this.client = client;
         this.magazin_id = magazin_id;
         this.magazin = magazin;
+        this.metoda_plata = metoda_plata;
+        this.status = status;
+        this.data = data;
+        this.data_returnare = data_returnare;
+    }
+
+    public Tranzactie(int tranzactie_id, int client_id, int magazin_id, String metoda_plata, String status,
+                      Date data, Date data_returnare) {
+        this.tranzactie_id = tranzactie_id;
+        this.client_id = client_id;
+        this.magazin_id = magazin_id;
         this.metoda_plata = metoda_plata;
         this.status = status;
         this.data = data;

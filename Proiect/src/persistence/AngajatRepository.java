@@ -43,7 +43,7 @@ public class AngajatRepository implements GenericRepository<Angajat>{
             prepedStatement.setString(7, entity.getNumar_telefon());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -133,7 +133,7 @@ public class AngajatRepository implements GenericRepository<Angajat>{
             prepedStatement.setInt(7, entity.getAngajat_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -151,7 +151,7 @@ public class AngajatRepository implements GenericRepository<Angajat>{
             prepedStatement.setInt(1, entity.getAngajat_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

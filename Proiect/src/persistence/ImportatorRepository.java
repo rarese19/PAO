@@ -39,7 +39,7 @@ public class ImportatorRepository implements GenericRepository<Importator>{
             prepedStatement.setString(5, entity.getMetoda_transport());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,8 +58,9 @@ public class ImportatorRepository implements GenericRepository<Importator>{
             ResultSet result = prepedStatement.executeQuery();
             result.next();
 
-            return new Importator(result.getInt(1), result.getString(2), result.getString(3),
-                    result.getString(4), result.getString(5));
+            audit.write(sql, id, "Done successfully!");
+            return new Importator(result.getInt(1), result.getString(2),
+                    result.getString(3), result.getString(4), result.getString(5));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -79,6 +80,8 @@ public class ImportatorRepository implements GenericRepository<Importator>{
                 importatori.add(new Importator(result.getInt(1), result.getString(2), result.getString(3),
                         result.getString(4), result.getString(5)));
             }
+
+            audit.write(sql, importatori, "Done succesfully!");
             return importatori;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -103,7 +106,7 @@ public class ImportatorRepository implements GenericRepository<Importator>{
             prepedStatement.setInt(5, entity.getImportator_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -121,7 +124,7 @@ public class ImportatorRepository implements GenericRepository<Importator>{
             prepedStatement.setInt(1, entity.getImportator_id());
 
             prepedStatement.execute();
-            audit.write(sql, "Done successfully!");
+            audit.write(sql, entity, "Done successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

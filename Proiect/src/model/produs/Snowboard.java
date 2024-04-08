@@ -12,6 +12,8 @@ public class Snowboard extends Produs{
         this.latime = latime;
     }
 
+    public Snowboard() { }
+
     public String getStil() {
         return stil;
     }

@@ -5,7 +5,10 @@ public class PerecheSchi extends Produs{
     private String flexibilitate;
     private String nivel_experienta;
 
-    public PerecheSchi(int produs_id, String nume, int pret, int disponibilitate, String brand, int lungime, String flexibilitate, String nivel_experienta) {
+    public PerecheSchi() { }
+
+    public PerecheSchi(int produs_id, String nume, int pret, int disponibilitate, String brand, int lungime,
+                       String flexibilitate, String nivel_experienta) {
         super(produs_id, nume, pret, disponibilitate, brand);
         this.lungime = lungime;
         this.flexibilitate = flexibilitate;
