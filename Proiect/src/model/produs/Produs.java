@@ -2,6 +2,7 @@ package model.produs;
 
 public abstract class Produs {
     protected int produs_id;
+
     protected String nume;
     protected int pret;
     protected int disponibilitate;
