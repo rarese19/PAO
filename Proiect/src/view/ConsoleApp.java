@@ -384,49 +384,108 @@ public class ConsoleApp {
         int choice = 0;
 
         while (true) {
-            printRreadMenu();
+            System.out.println("-------Read Menu-------");
+            System.out.println("1. Get by ID");
+            System.out.println("2. Get all");
+            System.out.println("3. Return");
             System.out.println("Choose option: ");
             choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
-                    angajatRepository.getAll().forEach(System.out::println);
-                    break;
+                    printRreadMenu();
+                    System.out.println("Choose option: ");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                    int id = 0;
+                    System.out.println("Introduceti ID-ul: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println(angajatRepository.get(id));
+                            break;
+                        case 2:
+                            System.out.println(clientRepository.get(id));
+                            break;
+                        case 3:
+                            System.out.println(importatorRepository.get(id));
+                            break;
+                        case 4:
+                            System.out.println(magazinRepository.get(id));
+                            break;
+                        case 5:
+                            System.out.println(partieRepository.get(id));
+                            break;
+                        case 6:
+                            System.out.println(produsRepository.get(id));
+                            break;
+                        case 7:
+                            System.out.println(produsRepository.get(id));
+                            break;
+                        case 8:
+                            System.out.println(produsRepository.get(id));
+                            break;
+                        case 9:
+                            System.out.println(produsRepository.get(id));
+                            break;
+                        case 10:
+                            System.out.println(statiuneRepository.get(id));
+                            break;
+                        case 11:
+                            System.out.println(tranzactieRepository.get(id));
+                            break;
+                        case 12:
+                            return;
+                        default:
+                            break;
+                    }
                 case 2:
-                    clientRepository.getAll().forEach(System.out::println);
-                    break;
-                case 3:
-                    importatorRepository.getAll().forEach(System.out::println);
-                    break;
-                case 4:
-                    magazinRepository.getAll().forEach(System.out::println);
-                    break;
-                case 5:
-                    partieRepository.getAll().forEach(System.out::println);
-                    break;
-                case 6:
-                    produsRepository.getAll().forEach(System.out::println);
-                    break;
-                case 7:
-                    produsRepository.getAll().forEach(System.out::println);
-                    break;
-                case 8:
-                    produsRepository.getAll().forEach(System.out::println);
-                    break;
-                case 9:
-                    produsRepository.getAll().forEach(System.out::println);
-                    break;
-                case 10:
-                    statiuneRepository.getAll().forEach(System.out::println);
-                    break;
-                case 11:
-                    tranzactieRepository.getAll().forEach(System.out::println);
-                    break;
-                case 12:
-                    return;
-                default:
-                    break;
+                    printRreadMenu();
+                    System.out.println("Choose option: ");
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (choice) {
+                        case 1:
+                            angajatRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 2:
+                            clientRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 3:
+                            importatorRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 4:
+                            magazinRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 5:
+                            partieRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 6:
+                            produsRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 7:
+                            produsRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 8:
+                            produsRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 9:
+                            produsRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 10:
+                            statiuneRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 11:
+                            tranzactieRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 12:
+                            return;
+                        default:
+                            break;
+                    }
             }
         }
     }
