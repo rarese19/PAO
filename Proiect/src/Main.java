@@ -1,12 +1,8 @@
-import java.sql.*;
-
-import model.Client;
-import service.*;
-import view.ConsoleApp;
+import view.*;
 
 public class Main {
     public static void main(String[] args) {
-        ConsoleApp consoleApp = ConsoleApp.getInstance();
-        consoleApp.run();
+        ConsoleApp app = new ConsoleApp();
+        app.run();
     }
 }
