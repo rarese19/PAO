@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class MagazinRepository implements GenericRepository<Magazin>{
     private static MagazinRepository instance = null;
-    private StatiuneRepository statiuneRepository;
-    private AngajatRepository angajatRepository;
+    private StatiuneRepository statiuneRepository = StatiuneRepository.getInstance();
+    private AngajatRepository angajatRepository = AngajatRepository.getInstance();
 
     public void setRepositories() {
         statiuneRepository = StatiuneRepository.getInstance();

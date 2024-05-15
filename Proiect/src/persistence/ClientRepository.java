@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ClientRepository implements GenericRepository<Client>{
     private static ClientRepository instance = null;
 
-    private TranzactieRepository tranzactieRepository;
+    private TranzactieRepository tranzactieRepository = TranzactieRepository.getInstance();
 
     private ClientRepository() { }
 
@@ -28,18 +28,17 @@ public class ClientRepository implements GenericRepository<Client>{
     @Override
     public void add(Client entity) {
         String sql = """
-                    INSERT INTO client VALUES(?, ?, ?, ?, ?, ?)""";
+                    INSERT INTO client VALUES(NR_CLIENTI.nextval, ?, ?, ?, ?, ?)""";
 
         try {
             OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
                     dbConnection.getConn().prepareStatement(sql);
 
-            prepedStatement.setInt(1, entity.getClient_id());
-            prepedStatement.setString(2, entity.getNume());
-            prepedStatement.setString(3, entity.getPrenume());
-            prepedStatement.setLong(4, entity.getCnp());
-            prepedStatement.setString(5, entity.getAdresa());
-            prepedStatement.setString(6, entity.getNumar_telefon());
+            prepedStatement.setString(1, entity.getNume());
+            prepedStatement.setString(2, entity.getPrenume());
+            prepedStatement.setLong(3, entity.getCnp());
+            prepedStatement.setString(4, entity.getAdresa());
+            prepedStatement.setString(5, entity.getNumar_telefon());
 
             prepedStatement.execute();
             audit.write(sql, entity, "Done successfully!");

@@ -3,6 +3,17 @@ package view;
 import java.util.Scanner;
 
 public class ConsoleApp {
+    private static ConsoleApp instance = null;
+
+
+    private ConsoleApp() {}
+
+    public static ConsoleApp getInstance() {
+        if (instance == null) {
+            instance = new ConsoleApp();
+        }
+        return instance;
+    }
     public void run() {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
@@ -10,11 +21,12 @@ public class ConsoleApp {
             System.out.println("-------Welcome to WSS-------");
             System.out.println("1. Admin Mode");
             System.out.println("2. Manager Mode");
-            do {
-                System.out.print("Choose option: ");
-                choice = scanner.nextInt();
-                scanner.nextLine();
-            } while (choice < 1 || choice > 2);
+            System.out.println("3. Casierie");
+            System.out.println("4. Exit");
+            System.out.print("Choose option: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
 
             switch (choice) {
                 case 1:
@@ -25,6 +37,12 @@ public class ConsoleApp {
                     ManagerMode managerMode = ManagerMode.getInstance();
                     managerMode.run();
                     break;
+                case 3:
+                    CasierieMode casierieMode = CasierieMode.getInstance();
+                    casierieMode.run();
+                    break;
+                case 4:
+                    System.exit(0);
                 default:
                     break;
             }

@@ -1,14 +1,14 @@
 package model.tabele_asociative;
 
-public class Magazin_Produs_Importator {
+public class MagazinProdusImportator {
     private int magazin_id;
     private int produs_id;
     private int importator_id;
     private int cantitate;
 
-    public Magazin_Produs_Importator() { }
+    public MagazinProdusImportator() { }
 
-    public Magazin_Produs_Importator(int magazin_id, int produs_id, int importator_id, int cantitate) {
+    public MagazinProdusImportator(int magazin_id, int produs_id, int importator_id, int cantitate) {
         this.magazin_id = magazin_id;
         this.produs_id = produs_id;
         this.importator_id = importator_id;

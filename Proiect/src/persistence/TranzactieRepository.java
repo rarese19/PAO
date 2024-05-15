@@ -22,19 +22,18 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
     @Override
     public void add(Tranzactie entity) {
         String sql = """
-                    INSERT INTO tranzactie VALUES(?, ?, ?, ?, ?, ?, ?)""";
+                    INSERT INTO tranzactie VALUES(ID_TRANZACTII.nextval, ?, ?, ?, ?, ?, ?)""";
 
         try {
             OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
                     dbConnection.getConn().prepareStatement(sql);
 
-            prepedStatement.setInt(1, entity.getTranzactie_id());
+            prepedStatement.setInt(1, entity.getMagazin_id());
             prepedStatement.setInt(2, entity.getMagazin_id());
-            prepedStatement.setInt(3, entity.getMagazin_id());
-            prepedStatement.setString(4, entity.getMetoda_plata());
-            prepedStatement.setDate(5, entity.getData());
-            prepedStatement.setDate(6, entity.getData_returnare());
-            prepedStatement.setString(7, entity.getStatus());
+            prepedStatement.setString(3, entity.getMetoda_plata());
+            prepedStatement.setDate(4, entity.getData());
+            prepedStatement.setDate(5, entity.getData_returnare());
+            prepedStatement.setString(6, entity.getStatus());
 
             prepedStatement.execute();
             audit.write(sql, entity, "Done successfully!");
@@ -104,8 +103,8 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
 
             while (result.next()) {
                 tranzactii.add(new Tranzactie(result.getInt(1), result.getInt(2),
-                        result.getInt(3), result.getString(4), result.getString(5),
-                        result.getDate(6), result.getDate(7)));
+                        result.getInt(3), result.getString(4), result.getString(7),
+                        result.getDate(5), result.getDate(6)));
             }
             audit.write(sql, null, "Done successfully!");
             return tranzactii;

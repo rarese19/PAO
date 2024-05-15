@@ -1,0 +1,10 @@
+Statement 0
+SELECT * FROM tranzactie
+null
+Done successfully!
+
+Statement 1
+SELECT * FROM tranzactie WHERE tranzactie_id = ?
+null
+Done successfully!
+

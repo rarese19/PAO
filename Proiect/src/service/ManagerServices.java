@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class ManagerServices {
     private static ManagerServices instance = null;
+    DBConnection dbConnection = DBConnection.getInstance();
 
     private ManagerServices() {}
 
@@ -34,7 +35,7 @@ public class ManagerServices {
 
         try {
             OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
-                    DBConnection.getInstance().getConn().prepareStatement(sql);
+                    dbConnection.getConn().prepareStatement(sql);
 
             ResultSet result = prepedStatement.executeQuery();
 
@@ -58,6 +59,31 @@ public class ManagerServices {
                 for (String s : entry.getValue()) {
                     System.out.println(s);
                 }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void getNumarProduseClient(int client_id) {
+        String sql = """
+                    SELECT COUNT(tp.produs_id)
+                    FROM client c, tranzactie t, tranzactie_produs tp
+                    WHERE c.client_id = t.client_id(+)
+                    AND t.tranzactie_id = tp.tranzactie_id(+)
+                    AND c.CLIENT_ID = ?
+                     """;
+        try {
+            OraclePreparedStatement prepedStatement = (OraclePreparedStatement)
+                    dbConnection.getConn().prepareStatement(sql);
+
+            prepedStatement.setInt(1, client_id);
+
+            ResultSet result = prepedStatement.executeQuery();
+
+            while (result.next()) {
+                System.out.println("Clientul cu id-ul " + client_id + " a cumparat " +
+                        result.getInt(1) + " produs(e).");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package view;
 
 import model.produs.PerecheSchi;
+import model.tabele_asociative.TranzactieProdus;
 import persistence.*;
 
 import model.*;
@@ -20,6 +21,8 @@ public class AdminMode {
     ProdusRepository produsRepository;
     ClientRepository clientRepository;
     TranzactieRepository tranzactieRepository;
+
+    TranzactieProdusRepository tranzactieProdusRepository;
 
     private AdminMode() {
         statiuneRepository = StatiuneRepository.getInstance();
@@ -43,6 +46,8 @@ public class AdminMode {
         clientRepository.setRepositories();
 
         tranzactieRepository = TranzactieRepository.getInstance();
+
+        tranzactieProdusRepository = TranzactieProdusRepository.getInstance();
 
     }
 
@@ -80,7 +85,8 @@ public class AdminMode {
         System.out.println("9. Accesoriu");
         System.out.println("10. Statiune");
         System.out.println("11. Tranzactie");
-        System.out.println("12. Return");
+        System.out.println("12. Tranzactie Produs");
+        System.out.println("13. Return");
         System.out.println("------------------------");
     }
 
@@ -124,8 +130,7 @@ public class AdminMode {
                     deleteMenu();
                     break;
                 case 5:
-                    System.exit(0);
-                    break;
+                    return;
             }
         }
     }
@@ -167,9 +172,6 @@ public class AdminMode {
                 case 2:
                     Client client = new Client();
                     System.out.println("Introduceti datele clientului: ");
-                    System.out.println("ID: ");
-                    client.setClient_id(scanner.nextInt());
-                    scanner.nextLine();
                     System.out.println("Nume: ");
                     client.setNume(scanner.nextLine());
                     System.out.println("Prenume: ");
@@ -351,9 +353,6 @@ public class AdminMode {
                 case 11:
                     Tranzactie tranzactie = new Tranzactie();
                     System.out.println("Introduceti datele tranzactiei: ");
-                    System.out.println("ID: ");
-                    tranzactie.setTranzactie_id(scanner.nextInt());
-                    scanner.nextLine();
                     System.out.println("Client ID: ");
                     tranzactie.setClient_id(scanner.nextInt());
                     scanner.nextLine();
@@ -371,6 +370,16 @@ public class AdminMode {
                     tranzactieRepository.add(tranzactie);
                     break;
                 case 12:
+                    TranzactieProdus tranzactieProdus = new TranzactieProdus();
+                    System.out.println("Introduceti datele tranzactiei produs: ");
+                    System.out.println("ID Produs: ");
+                    tranzactieProdus.setProdus_id(scanner.nextInt());
+                    System.out.println("ID Tranzactie: ");
+                    tranzactieProdus.setTranzactie_id(scanner.nextInt());
+                    System.out.println("Cantitate: ");
+                    tranzactieProdus.setCantitate(scanner.nextInt());
+                    tranzactieProdusRepository.add(tranzactieProdus);
+                case 13:
                     return;
                 default:
                     break;
@@ -436,6 +445,9 @@ public class AdminMode {
                             System.out.println(tranzactieRepository.get(id));
                             break;
                         case 12:
+                            System.out.println(tranzactieProdusRepository.get(id));
+                            break;
+                        case 13:
                             return;
                         default:
                             break;
@@ -481,10 +493,15 @@ public class AdminMode {
                             tranzactieRepository.getAll().forEach(System.out::println);
                             break;
                         case 12:
+                            tranzactieProdusRepository.getAll().forEach(System.out::println);
+                            break;
+                        case 13:
                             return;
                         default:
                             break;
                     }
+                case 3:
+                    return;
             }
         }
     }
@@ -730,6 +747,19 @@ public class AdminMode {
                     tranzactieRepository.update(tranzactie);
                     break;
                 case 12:
+                    TranzactieProdus tranzactieProdus = new TranzactieProdus();
+                    System.out.println("Introduceti datele tranzactiei produs: ");
+                    System.out.println("ID Tranzactie Produs: ");
+                    tranzactieProdus.setTranzactie_produs_id(scanner.nextInt());
+                    System.out.println("ID Produs: ");
+                    tranzactieProdus.setProdus_id(scanner.nextInt());
+                    System.out.println("ID Tranzactie: ");
+                    tranzactieProdus.setTranzactie_id(scanner.nextInt());
+                    System.out.println("Cantitate: ");
+                    tranzactieProdus.setCantitate(scanner.nextInt());
+                    tranzactieProdusRepository.update(tranzactieProdus);
+                    break;
+                case 13:
                     return;
                 default:
                     break;
@@ -793,6 +823,10 @@ public class AdminMode {
                     tranzactieRepository.delete(tranzactieRepository.get(scanner.nextInt()));
                     break;
                 case 12:
+                    System.out.println("Introduceti ID-ul tranzactiei produs pe care doriti sa o stergeti: ");
+                    tranzactieProdusRepository.delete(tranzactieProdusRepository.get(scanner.nextInt()));
+                    break;
+                case 13:
                     return;
                 default:
                     break;
