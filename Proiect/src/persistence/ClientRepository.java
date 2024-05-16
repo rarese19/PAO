@@ -41,7 +41,7 @@ public class ClientRepository implements GenericRepository<Client>{
             prepedStatement.setString(5, entity.getNumar_telefon());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -62,7 +62,7 @@ public class ClientRepository implements GenericRepository<Client>{
             ResultSet result = prepedStatement.executeQuery();
             result.next();
 
-            audit.write(sql, id,"Done successfully!");
+            audit.write("getbyid", Client.class);
 
             return new Client(result.getInt(1), result.getString(2), result.getString(3),
                     result.getLong(4), result.getString(5), result.getString(6),
@@ -90,7 +90,7 @@ public class ClientRepository implements GenericRepository<Client>{
                         tranzactieRepository.getByClient(result.getInt(1))));
             }
 
-            audit.write(sql,null,"Done successfully!");
+            audit.write("getall",Client.class);
 
             return clients;
         } catch (SQLException e) {
@@ -117,7 +117,7 @@ public class ClientRepository implements GenericRepository<Client>{
             prepedStatement.setInt(6, entity.getClient_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity,"Done successfully!");
+            audit.write("update", entity);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -136,7 +136,7 @@ public class ClientRepository implements GenericRepository<Client>{
             prepedStatement.setInt(1, entity.getClient_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

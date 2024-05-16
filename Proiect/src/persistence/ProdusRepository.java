@@ -205,7 +205,7 @@ public class ProdusRepository  implements GenericRepository<Produs>{
 
         try {
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -356,7 +356,7 @@ public class ProdusRepository  implements GenericRepository<Produs>{
 
         try {
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

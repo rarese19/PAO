@@ -36,7 +36,7 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
             prepedStatement.setString(6, entity.getStatus());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -56,7 +56,7 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
             ResultSet result = prepedStatement.executeQuery();
             result.next();
 
-            audit.write(sql, null, "Done successfully!");
+            audit.write("getByID", Tranzactie.class);
             return new Tranzactie(result.getInt(1), result.getInt(2),
                     result.getInt(3), result.getString(4), result.getString(7),
                     result.getDate(5), result.getDate(6));
@@ -106,7 +106,7 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
                         result.getInt(3), result.getString(4), result.getString(7),
                         result.getDate(5), result.getDate(6)));
             }
-            audit.write(sql, null, "Done successfully!");
+            audit.write("getALl", Tranzactie.class);
             return tranzactii;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -133,7 +133,7 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
             prepedStatement.setInt(7, entity.getTranzactie_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -151,7 +151,7 @@ public class TranzactieRepository implements GenericRepository<Tranzactie>{
             prepedStatement.setInt(1, entity.getTranzactie_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

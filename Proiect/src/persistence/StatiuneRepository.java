@@ -45,7 +45,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
 
             prepedStatement.execute();
 
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("add", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,11 +79,10 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                         partieRepository.getPartiiByStatiune(statiune),
                         magazinRepository.getMagazineByStatiune(statiune)
                 );
-                audit.write(sql, toReturn, "Done successfully!");
+                audit.write("getByID", toReturn);
                 return toReturn;
             }
             else {
-                audit.write(sql, null, "No result found!");
                 return null;
             }
         }
@@ -110,11 +109,10 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                         res.getString(3),
                         res.getString(4)
                 );
-                audit.write(sql, statiune, "Done successfully!");
+                audit.write("statiuneForMagazin", statiune);
                 return statiune;
             }
             else {
-                audit.write(sql, null, "No result found!");
                 return null;
             }
         } catch (SQLException e) {
@@ -140,11 +138,10 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                         res.getString(3),
                         res.getString(4)
                 );
-                audit.write(sql, statiune, "Done successfully!");
+                audit.write("statiuneForAngajat", statiune);
                 return statiune;
             }
             else {
-                audit.write(sql, null, "No result found!");
                 return null;
             }
         }
@@ -181,7 +178,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
                 );
                 statiuni.add(toAdd);
             }
-            audit.write(sql, null, "Done successfully!");
+            audit.write("getAll", Statiune.class);
             return statiuni;
         }
         catch (SQLException e) {
@@ -204,7 +201,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
             prepedStatement.setInt(4, entity.getStatiune_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -223,7 +220,7 @@ public class StatiuneRepository implements GenericRepository<Statiune>{
             prepedStatement.setInt(1, entity.getStatiune_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
