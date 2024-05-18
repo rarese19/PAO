@@ -2,6 +2,9 @@ package service;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Audit {
     private static Audit instance = null;
@@ -23,10 +26,13 @@ public class Audit {
         return instance;
     }
 
-    public <T> void write(String sqlStatement, T entity, String result) {
+    public <T> void write(String action, T entity) {
         try {
-            writer.write("Statement " + count++ + "\n");
-            writer.write(sqlStatement + "\n" + entity + '\n' + result + "\n\n");
+            writer.write(action + entity.getClass().getSimpleName());
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String time = now.format(formatter);
+            writer.write(", " + time + "\n");
             writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);

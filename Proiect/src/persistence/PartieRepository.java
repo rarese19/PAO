@@ -41,7 +41,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setString(6, entity.getGrad_dificultate());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -69,7 +69,7 @@ public class PartieRepository implements GenericRepository<Partie>{
                         res.getInt(5),
                         res.getString(6)
                 );
-                audit.write(sql, partie, "Done successfully!");
+                audit.write("getByID", partie);
                 return partie;
             }
             return null;
@@ -99,7 +99,7 @@ public class PartieRepository implements GenericRepository<Partie>{
                 );
                 partii.add(partie);
             }
-            audit.write(sql, null, "Done successfully!");
+            audit.write("getALl", Partie.class);
             return partii;
         }
         catch (SQLException e) {
@@ -130,7 +130,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setInt(6, entity.getPartie_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -149,7 +149,7 @@ public class PartieRepository implements GenericRepository<Partie>{
             prepedStatement.setInt(1, entity.getPartie_id());
 
             prepedStatement.executeUpdate();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -178,7 +178,6 @@ public class PartieRepository implements GenericRepository<Partie>{
                 );
                 partii.add(partie);
             }
-            audit.write(sql, statiune, "Done successfully!");
             return partii;
         }
         catch (Exception e) {

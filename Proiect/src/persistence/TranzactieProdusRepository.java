@@ -37,7 +37,7 @@ public class TranzactieProdusRepository implements GenericRepository<TranzactieP
             prepedStatement.setInt(3, entity.getCantitate());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -102,7 +102,7 @@ public class TranzactieProdusRepository implements GenericRepository<TranzactieP
             prepedStatement.setInt(4, entity.getTranzactie_produs_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +120,7 @@ public class TranzactieProdusRepository implements GenericRepository<TranzactieP
             prepedStatement.setInt(1, entity.getTranzactie_produs_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

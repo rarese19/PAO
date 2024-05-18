@@ -43,7 +43,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
             prepedStatement.setString(4, entity.getAdresa_mail());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("create", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -69,7 +69,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                         res.getString(3),
                         res.getString(4)
                 );
-                audit.write(sql, magazin, "Done successfully!");
+                audit.write("getByID", magazin);
                 return magazin;
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                         angajatRepository.getByMagazin(magazin));
                 magazine.add(toAdd);
             }
-            audit.write(sql, null, "Done succesfully!");
+            audit.write("getAll", Magazin.class);
             return magazine;
 
         }
@@ -160,7 +160,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
             prepedStatement.setInt(4, entity.getMagazin_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("update", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -179,7 +179,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
             prepedStatement.setInt(1, entity.getMagazin_id());
 
             prepedStatement.execute();
-            audit.write(sql, entity, "Done successfully!");
+            audit.write("delete", entity);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -207,7 +207,7 @@ public class MagazinRepository implements GenericRepository<Magazin>{
                 );
                 magazine.add(magazin);
             }
-            audit.write(sql, statiune, "Done successfully!");
+            audit.write("magazinByStatiune", statiune);
             return magazine;
         } catch (SQLException e) {
             throw new RuntimeException(e);
